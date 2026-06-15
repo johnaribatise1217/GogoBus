@@ -1,4 +1,5 @@
 import 'package:bus_ticketing/core/theme/app_colors.dart';
+import 'package:bus_ticketing/features/home/models/terminal_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
@@ -121,9 +122,25 @@ class HomeContent extends StatelessWidget {
   final bool hasUpcomingTrip;
   final bool hasHistory;
 
-  const HomeContent({super.key, 
+  final Terminal? selectedDeparture;
+  final Terminal? selectedDestination;
+  final DateTime? selectedDate;
+  final VoidCallback onDeparturePressed;
+  final VoidCallback onDestinationPressed;
+  final VoidCallback onDatePressed;
+  final VoidCallback onSwapPressed;
+
+  const HomeContent({
+    super.key, 
     required this.hasUpcomingTrip,
     required this.hasHistory,
+    required this.selectedDeparture,
+    required this.selectedDestination,
+    required this.selectedDate,
+    required this.onDeparturePressed,
+    required this.onDestinationPressed,
+    required this.onDatePressed,
+    required this.onSwapPressed,
   });
 
   @override
@@ -166,7 +183,6 @@ class HomeContent extends StatelessWidget {
                                 text: 'Aribatise John',
                                 style: TextStyle(fontWeight: FontWeight.w700),
                               ),
-                              const TextSpan(text: ' 👋'),
                             ],
                           ),
                         ),
@@ -205,7 +221,7 @@ class HomeContent extends StatelessWidget {
                         height: 1.4,
                       ),
                     ),
-                    const SizedBox(height: 20,)
+                    const SizedBox(height: 20)
                   ],
                 ),
               ),
@@ -214,7 +230,15 @@ class HomeContent extends StatelessWidget {
                 offset: const Offset(0, -20),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: const BookingFormCard(),
+                  child: BookingFormCard(
+                    selectedDeparture: selectedDeparture,
+                    selectedDestination: selectedDestination,
+                    selectedDate: selectedDate,
+                    onDeparturePressed: onDeparturePressed,
+                    onDestinationPressed: onDestinationPressed,
+                    onDatePressed: onDatePressed,
+                    onSwapPressed: onSwapPressed,
+                  ),
                 ),
               ),
 
@@ -228,7 +252,7 @@ class HomeContent extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              //Upcoming trip card (if any)
+              //Upcoming trip card
               if (hasUpcomingTrip)
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -302,8 +326,8 @@ class HomeContent extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: List.generate(3, (i) => const HistoryCard())
-                        .expand((card) => [card, const SizedBox(height: 12)])
-                        .toList(),
+                      .expand((card) => [card, const SizedBox(height: 12)])
+                      .toList(),
                   ),
                 )
               else
@@ -318,7 +342,25 @@ class HomeContent extends StatelessWidget {
 }
 
 class BookingFormCard extends StatelessWidget {
-  const BookingFormCard({super.key});
+  final Terminal? selectedDeparture;
+  final Terminal? selectedDestination;
+  final DateTime? selectedDate;
+  final VoidCallback onDeparturePressed;
+  final VoidCallback onDestinationPressed;
+  final VoidCallback onDatePressed;
+  final VoidCallback onSwapPressed;
+
+  const BookingFormCard({
+    super.key,
+    required this.selectedDeparture,
+    required this.selectedDestination,
+    required this.selectedDate,
+    required this.onDeparturePressed,
+    required this.onDestinationPressed,
+    required this.onDatePressed,
+    required this.onSwapPressed,
+  });
+
 
   @override
   Widget build(BuildContext context) {
@@ -353,34 +395,45 @@ class BookingFormCard extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  _selectField(
-                    label: 'Departure',
-                    hint: 'Select departure point',
-                    icon: Icons.radio_button_checked,
+                  GestureDetector(
+                    onTap: onDeparturePressed,
+                    child: _selectField(
+                      label: 'Departure',
+                      hint: selectedDeparture?.city ?? 'Select departure point',
+                      icon: Icons.radio_button_checked,
+                      isFilled: selectedDeparture != null,
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  _selectField(
-                    label: 'Destination',
-                    hint: 'Select destination',
-                    icon: Icons.location_on_outlined,
+                  GestureDetector(
+                    onTap: onDestinationPressed,
+                    child: _selectField(
+                      label: 'Destination',
+                      hint: selectedDestination?.city ?? 'Select destination',
+                      icon: Icons.location_on_outlined,
+                      isFilled: selectedDestination != null,
+                    ),
                   ),
                 ],
               ),
 
               Positioned(
-                right: 12,
-                top: 56,
-                child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: const BoxDecoration(
-                    color: AppColors.accent,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.swap_vert_rounded,
-                    color: AppColors.white,
-                    size: 20,
+                right: 15,
+                top: 75,
+                child: GestureDetector(
+                  onTap: onSwapPressed,
+                  child: Container(
+                    width: 48,
+                    height: 48,
+                    decoration: const BoxDecoration(
+                      color: AppColors.accent,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.swap_vert_rounded,
+                      color: AppColors.white,
+                      size: 25,
+                    ),
                   ),
                 ),
               ),
@@ -398,26 +451,41 @@ class BookingFormCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.divider),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.calendar_today_outlined,
-                    size: 18, color: AppColors.textHint),
-                const SizedBox(width: 10),
-                Text(
-                  'dd/mm/yyyy',
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: AppColors.textHint,
+          GestureDetector(
+            onTap: onDatePressed,
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.divider),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.calendar_today_outlined,
+                    size: 18,
+                    color: selectedDate != null
+                      ? AppColors.primary
+                      : AppColors.textHint
                   ),
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  Text(
+                    selectedDate != null
+                      ? _formatDate(selectedDate!)
+                      : 'dd/mm/yyyy',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: selectedDate != null
+                        ? AppColors.textDark
+                        : AppColors.textHint,
+                      fontWeight: selectedDate != null
+                        ? FontWeight.w600
+                        : FontWeight.normal,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
 
@@ -434,10 +502,17 @@ class BookingFormCard extends StatelessWidget {
     );
   }
 
-  Widget _selectField({
+  String _formatDate(DateTime date) {
+    final day = date.day.toString().padLeft(2, '0');
+    final month = date.month.toString().padLeft(2, '0');
+    return '$day/$month/${date.year}';
+  }
+
+   Widget _selectField({
     required String label,
     required String hint,
     required IconData icon,
+    required bool isFilled,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -460,19 +535,24 @@ class BookingFormCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(icon, size: 18, color: AppColors.textHint),
+              Icon(
+                icon,
+                size: 18,
+                color: isFilled ? AppColors.primary : AppColors.textHint,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
                   hint,
                   style: GoogleFonts.poppins(
                     fontSize: 14,
-                    color: AppColors.textHint,
+                    color: isFilled ? AppColors.textDark : AppColors.textHint,
+                    fontWeight: isFilled ? FontWeight.w600 : FontWeight.normal,
                   ),
                 ),
               ),
               const Icon(Icons.keyboard_arrow_down_rounded,
-                  color: AppColors.textHint),
+                color: AppColors.textHint),
             ],
           ),
         ),
