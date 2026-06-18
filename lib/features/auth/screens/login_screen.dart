@@ -10,7 +10,6 @@ class LoginScreen extends StatefulWidget{
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
-
 }
 
 class _LoginScreenState extends State<LoginScreen>{
@@ -172,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen>{
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
-                  onPressed: () => context.go('/login'),
+                  onPressed: () => context.go('/home'),
                   child: const Text('Login'),
                 ),
                 const SizedBox(height: 20),
