@@ -71,7 +71,11 @@ class HomeSkeleton extends StatelessWidget {
     );
   }
 
-  Widget _block({required double width, required double height, double radius = 8}) {
+  Widget _block({
+    required double width,
+    required double height,
+    double radius = 8,
+  }) {
     return Container(
       width: width,
       height: height,
@@ -129,9 +133,10 @@ class HomeContent extends StatelessWidget {
   final VoidCallback onDestinationPressed;
   final VoidCallback onDatePressed;
   final VoidCallback onSwapPressed;
+  final VoidCallback onSearchPressed;
 
   const HomeContent({
-    super.key, 
+    super.key,
     required this.hasUpcomingTrip,
     required this.hasHistory,
     required this.selectedDeparture,
@@ -141,6 +146,7 @@ class HomeContent extends StatelessWidget {
     required this.onDestinationPressed,
     required this.onDatePressed,
     required this.onSwapPressed,
+    required this.onSearchPressed,
   });
 
   @override
@@ -157,14 +163,12 @@ class HomeContent extends StatelessWidget {
               Container(
                 width: double.infinity,
                 padding: EdgeInsets.only(
-                top: MediaQuery.of(context).padding.top + 16,
-                left: 16,
-                right: 16,
-                bottom: 16,
-              ),
-                decoration: const BoxDecoration(
-                  color: AppColors.primary,
+                  top: MediaQuery.of(context).padding.top + 16,
+                  left: 16,
+                  right: 16,
+                  bottom: 16,
                 ),
+                decoration: const BoxDecoration(color: AppColors.primary),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -221,7 +225,7 @@ class HomeContent extends StatelessWidget {
                         height: 1.4,
                       ),
                     ),
-                    const SizedBox(height: 20)
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -238,6 +242,7 @@ class HomeContent extends StatelessWidget {
                     onDestinationPressed: onDestinationPressed,
                     onDatePressed: onDatePressed,
                     onSwapPressed: onSwapPressed,
+                    onSearchPressed: onSearchPressed,
                   ),
                 ),
               ),
@@ -279,7 +284,10 @@ class HomeContent extends StatelessWidget {
                         ),
                         const SizedBox(width: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
                             color: AppColors.background,
                             borderRadius: BorderRadius.circular(8),
@@ -326,8 +334,8 @@ class HomeContent extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
                     children: List.generate(3, (i) => const HistoryCard())
-                      .expand((card) => [card, const SizedBox(height: 12)])
-                      .toList(),
+                        .expand((card) => [card, const SizedBox(height: 12)])
+                        .toList(),
                   ),
                 )
               else
@@ -349,6 +357,7 @@ class BookingFormCard extends StatelessWidget {
   final VoidCallback onDestinationPressed;
   final VoidCallback onDatePressed;
   final VoidCallback onSwapPressed;
+  final VoidCallback onSearchPressed;
 
   const BookingFormCard({
     super.key,
@@ -359,8 +368,8 @@ class BookingFormCard extends StatelessWidget {
     required this.onDestinationPressed,
     required this.onDatePressed,
     required this.onSwapPressed,
+    required this.onSearchPressed
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -466,8 +475,8 @@ class BookingFormCard extends StatelessWidget {
                     Icons.calendar_today_outlined,
                     size: 18,
                     color: selectedDate != null
-                      ? AppColors.primary
-                      : AppColors.textHint
+                        ? AppColors.primary
+                        : AppColors.textHint,
                   ),
                   const SizedBox(width: 10),
                   Text(
@@ -483,7 +492,7 @@ class BookingFormCard extends StatelessWidget {
                         ? FontWeight.w600
                         : FontWeight.normal,
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -492,9 +501,7 @@ class BookingFormCard extends StatelessWidget {
           const SizedBox(height: 20),
 
           ElevatedButton(
-            onPressed: () {
-              // TODO: navigate to search results
-            },
+            onPressed: onSearchPressed,
             child: const Text('Search Ticket'),
           ),
         ],
@@ -508,7 +515,7 @@ class BookingFormCard extends StatelessWidget {
     return '$day/$month/${date.year}';
   }
 
-   Widget _selectField({
+  Widget _selectField({
     required String label,
     required String hint,
     required IconData icon,
@@ -551,8 +558,10 @@ class BookingFormCard extends StatelessWidget {
                   ),
                 ),
               ),
-              const Icon(Icons.keyboard_arrow_down_rounded,
-                color: AppColors.textHint),
+              const Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: AppColors.textHint,
+              ),
             ],
           ),
         ),
@@ -589,8 +598,11 @@ class BuspointCard extends StatelessWidget {
               color: AppColors.primaryLight,
               shape: BoxShape.circle,
             ),
-            child: const Icon(Icons.workspace_premium_rounded,
-                color: AppColors.white, size: 20),
+            child: const Icon(
+              Icons.workspace_premium_rounded,
+              color: AppColors.white,
+              size: 20,
+            ),
           ),
           const SizedBox(width: 12),
           Column(
@@ -623,7 +635,11 @@ class BuspointCard extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.redeem_rounded, size: 16, color: AppColors.accent),
+                const Icon(
+                  Icons.redeem_rounded,
+                  size: 16,
+                  color: AppColors.accent,
+                ),
                 const SizedBox(width: 6),
                 Text(
                   'Redeem',
@@ -669,8 +685,11 @@ class UpcomingTripCard extends StatelessWidget {
                       color: AppColors.white.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: const Icon(Icons.directions_bus_rounded,
-                        color: AppColors.white, size: 18),
+                    child: const Icon(
+                      Icons.directions_bus_rounded,
+                      color: AppColors.white,
+                      size: 18,
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Column(
@@ -696,7 +715,10 @@ class UpcomingTripCard extends StatelessWidget {
                 ],
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.error.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(100),
@@ -761,11 +783,14 @@ class UpcomingTripCard extends StatelessWidget {
                       Expanded(
                         child: Container(
                           height: 1,
-                          color: AppColors.whiteMuted.withValues(alpha:0.3),
+                          color: AppColors.whiteMuted.withValues(alpha: 0.3),
                         ),
                       ),
-                      const Icon(Icons.directions_bus_rounded,
-                          color: AppColors.accent, size: 16),
+                      const Icon(
+                        Icons.directions_bus_rounded,
+                        color: AppColors.accent,
+                        size: 16,
+                      ),
                       Expanded(
                         child: Container(
                           height: 1,
@@ -800,7 +825,10 @@ class UpcomingTripCard extends StatelessWidget {
           ),
 
           const SizedBox(height: 16),
-          Divider(color: AppColors.whiteMuted.withValues(alpha: 0.15), height: 1),
+          Divider(
+            color: AppColors.whiteMuted.withValues(alpha: 0.15),
+            height: 1,
+          ),
           const SizedBox(height: 12),
 
           Row(
@@ -835,8 +863,11 @@ class UpcomingTripCard extends StatelessWidget {
                         color: AppColors.accent,
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.arrow_forward_rounded,
-                        color: AppColors.white, size: 12),
+                      child: const Icon(
+                        Icons.arrow_forward_rounded,
+                        color: AppColors.white,
+                        size: 12,
+                      ),
                     ),
                   ],
                 ),
@@ -895,21 +926,41 @@ class HistoryCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Departure',
-                    style: GoogleFonts.poppins(fontSize: 11, color: AppColors.textSecondary)),
-                  Text('Yogyakarta',
+                  Text(
+                    'Departure',
                     style: GoogleFonts.poppins(
-                      fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textDark)),
+                      fontSize: 11,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                  Text(
+                    'Yogyakarta',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textDark,
+                    ),
+                  ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text('Destination',
-                    style: GoogleFonts.poppins(fontSize: 11, color: AppColors.textSecondary)),
-                  Text('Madiun',
+                  Text(
+                    'Destination',
                     style: GoogleFonts.poppins(
-                      fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textDark)),
+                      fontSize: 11,
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                  Text(
+                    'Madiun',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textDark,
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -917,13 +968,27 @@ class HistoryCard extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              const Icon(Icons.calendar_today_outlined, size: 14, color: AppColors.textHint),
+              const Icon(
+                Icons.calendar_today_outlined,
+                size: 14,
+                color: AppColors.textHint,
+              ),
               const SizedBox(width: 6),
-              Text('Wed, 24 Oct 2024',
-                style: GoogleFonts.poppins(fontSize: 12, color: AppColors.textSecondary)),
+              Text(
+                'Wed, 24 Oct 2024',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: AppColors.textSecondary,
+                ),
+              ),
               const Spacer(),
-              Text('17:00 WIB',
-                style: GoogleFonts.poppins(fontSize: 12, color: AppColors.textSecondary)),
+              Text(
+                '17:00 WIB',
+                style: GoogleFonts.poppins(
+                  fontSize: 12,
+                  color: AppColors.textSecondary,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -934,14 +999,22 @@ class HistoryCard extends StatelessWidget {
               _tagLight(icon: Icons.cookie_outlined, label: 'Snack Only'),
               const Spacer(),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.success.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(100),
                 ),
-                child: Text('Finished',
-                    style: GoogleFonts.poppins(
-                        fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.success)),
+                child: Text(
+                  'Finished',
+                  style: GoogleFonts.poppins(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.success,
+                  ),
+                ),
               ),
             ],
           ),
@@ -962,7 +1035,13 @@ class HistoryCard extends StatelessWidget {
         children: [
           Icon(icon, size: 14, color: AppColors.textSecondary),
           const SizedBox(width: 6),
-          Text(label, style: GoogleFonts.poppins(fontSize: 11, color: AppColors.textSecondary)),
+          Text(
+            label,
+            style: GoogleFonts.poppins(
+              fontSize: 11,
+              color: AppColors.textSecondary,
+            ),
+          ),
         ],
       ),
     );

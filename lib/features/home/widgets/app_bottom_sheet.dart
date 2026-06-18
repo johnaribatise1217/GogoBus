@@ -99,6 +99,9 @@ class _BottomSheetContent extends StatelessWidget {
             Flexible(
               child: child,
             ),
+            // SingleChildScrollView(
+            //   child: child,
+            // ),
             SizedBox(height: MediaQuery.of(context).padding.bottom + 12),
           ],
         ),

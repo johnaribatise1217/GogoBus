@@ -2,6 +2,7 @@ import 'package:bus_ticketing/features/auth/screens/complete_account_screen.dart
 import 'package:bus_ticketing/features/auth/screens/login_screen.dart';
 import 'package:bus_ticketing/features/auth/screens/signup_screen.dart';
 import 'package:bus_ticketing/features/auth/screens/verify_screen_otp.dart';
+import 'package:bus_ticketing/features/home/models/terminal_data.dart';
 import 'package:bus_ticketing/features/home/screens/home_screen.dart';
 import 'package:bus_ticketing/features/home/screens/activity_screen.dart';
 import 'package:bus_ticketing/features/home/screens/profile_screen.dart';
@@ -9,6 +10,7 @@ import 'package:bus_ticketing/features/home/screens/notification_screen.dart';
 import 'package:bus_ticketing/features/onboarding/screens/get_started_screen.dart';
 import 'package:bus_ticketing/features/onboarding/screens/onboarding_screen.dart';
 import 'package:bus_ticketing/features/onboarding/screens/splash_screen.dart';
+import 'package:bus_ticketing/features/search/screens/search_result_screen.dart';
 import 'package:bus_ticketing/main_scaffold.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,11 +37,23 @@ class AppRouter {
       GoRoute(
         path: '/verify-otp',
         builder: (context, state) =>
-            const VerifyScreenOtp(email: 'aribatisejohn8@gmail.com'),
+          const VerifyScreenOtp(email: 'aribatisejohn8@gmail.com'),
       ),
       GoRoute(
         path: '/complete-account',
         builder: (context, state) => const CompleteAccountScreen(),
+      ),
+
+      GoRoute(
+        path: '/search-results',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return SearchResultScreen(
+            departure: extra['departure'] as Terminal,
+            destination: extra['destination'] as Terminal,
+            date: extra['date'] as DateTime,
+          );
+        },
       ),
 
       StatefulShellRoute.indexedStack(

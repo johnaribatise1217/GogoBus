@@ -1,8 +1,11 @@
+import 'package:bus_ticketing/core/theme/app_colors.dart';
 import 'package:bus_ticketing/features/home/models/terminal_data.dart';
 import 'package:bus_ticketing/features/home/widgets/date_picker_sheet.dart';
 import 'package:bus_ticketing/features/home/widgets/home_components.dart';
 import 'package:bus_ticketing/features/home/widgets/location_picker_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 enum HomeState { loading, empty, populated }
 
@@ -61,6 +64,35 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void _onSearchPressed() {
+    if (_selectedDeparture == null ||
+      _selectedDestination == null ||
+      _selectedDate == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Please select departure, destination, and date',
+              style: GoogleFonts.poppins(fontSize: 13),
+            ),
+            backgroundColor: AppColors.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        );
+        return;
+    }
+
+    context.go(
+      '/search-results',
+      extra: {
+        'departure': _selectedDeparture,
+        'destination': _selectedDestination,
+        'date': _selectedDate,
+      },
+    );
+  }
 
   @override
   void initState() {
@@ -72,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _state = HomeState.loading;
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     switch (_state) {
       case HomeState.loading:
@@ -89,6 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onDestinationPressed: _onDestinationPressed,
           onDatePressed: _onDatePressed,
           onSwapPressed: _onSwapPressed,
+          onSearchPressed: _onSearchPressed
         );
     }
   }
