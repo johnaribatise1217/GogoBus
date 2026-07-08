@@ -134,7 +134,7 @@ class _LocationPickerBodyState extends State<_LocationPickerBody> {
       shrinkWrap: true,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
       itemCount: _filteredTerminals.length,
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
+      separatorBuilder: (_, _) => const SizedBox(height: 12),
       itemBuilder: (context, index) {
         final terminal = _filteredTerminals[index];
         final isSelected =
@@ -163,7 +163,7 @@ class _TerminalListSkeleton extends StatelessWidget {
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
         itemCount: 6,
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        separatorBuilder: (_, _) => const SizedBox(height: 12),
         itemBuilder: (context, index) {
           return Container(
             height: 64,

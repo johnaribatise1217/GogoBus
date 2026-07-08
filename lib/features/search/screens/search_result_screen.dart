@@ -54,6 +54,18 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
     }
   }
 
+  void _onScheduleTap(int index) {
+    context.go(
+      '/ticket-details',
+      extra: {
+        'schedule': mockSchedules[index],
+        'departure': _departure,
+        'destination': _destination,
+        'date': _date,
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +100,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                         color: AppColors.white,
                         size: 18,
                       ),
-                    )
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
@@ -139,7 +151,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ),
 
                   GestureDetector(
@@ -161,10 +173,10 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           ),
                         ),
                       ],
-                    )
-                  )
+                    ),
+                  ),
                 ],
-              )
+              ),
             ),
 
             Padding(
@@ -184,7 +196,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                     const SizedBox(width: 8),
                     Container(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 2),
+                        horizontal: 10,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: BorderRadius.circular(8),
@@ -198,9 +212,9 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
                           color: AppColors.textDark,
                         ),
                       ),
-                    )
+                    ),
                   ],
-                )
+                ),
               ),
             ),
 
@@ -208,20 +222,18 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: mockSchedules.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 16),
+                separatorBuilder: (_, _) => const SizedBox(height: 16),
                 itemBuilder: (context, index) {
                   final schedule = mockSchedules[index];
                   return _ScheduleCard(
                     schedule: schedule,
-                    onTap: () {
-                      // TODO: navigate to seat selection
-                    },
+                    onTap: () => _onScheduleTap(index)
                   );
                 },
               ),
             ),
 
-            SizedBox(height: MediaQuery.of(context).padding.bottom + 16)
+            SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
           ],
         ),
       ),
@@ -249,12 +261,11 @@ class _ScheduleCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // bus number + route type 
+            // bus number + route type
             Container(
               width: double.infinity,
               margin: const EdgeInsets.all(5),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16, vertical: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
               decoration: BoxDecoration(
                 color: AppColors.background,
                 borderRadius: BorderRadius.circular(16),
@@ -356,24 +367,25 @@ class _ScheduleCard extends StatelessWidget {
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                            top: 4, left: 8, right: 8),
+                            top: 4,
+                            left: 8,
+                            right: 8,
+                          ),
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
                               Row(
                                 children: [
-                                  Expanded(
-                                    child: _dashedLine(),
-                                  ),
+                                  Expanded(child: _dashedLine()),
                                   const SizedBox(width: 70),
-                                  Expanded(
-                                    child: _dashedLine(),
-                                  ),
+                                  Expanded(child: _dashedLine()),
                                 ],
                               ),
                               Container(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 4),
+                                  horizontal: 10,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: AppColors.background,
                                   borderRadius: BorderRadius.circular(100),
@@ -419,7 +431,7 @@ class _ScheduleCard extends StatelessWidget {
                   const Divider(color: AppColors.divider, height: 1),
                   const SizedBox(height: 16),
 
-                  // -- seats available + price --
+                  //seats available + price
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -477,8 +489,8 @@ class _ScheduleCard extends StatelessWidget {
       builder: (context, constraints) {
         const dashWidth = 4.0;
         const dashSpace = 4.0;
-        final dashCount =
-          (constraints.maxWidth / (dashWidth + dashSpace)).floor();
+        final dashCount = (constraints.maxWidth / (dashWidth + dashSpace))
+            .floor();
         return Row(
           children: List.generate(dashCount, (_) {
             return Padding(

@@ -3,7 +3,6 @@ import 'package:bus_ticketing/core/utils/formatters.dart';
 import 'package:bus_ticketing/features/home/models/terminal_data.dart';
 import 'package:bus_ticketing/features/home/widgets/app_bottom_sheet.dart';
 import 'package:bus_ticketing/features/home/widgets/date_picker_sheet.dart';
-import 'package:bus_ticketing/features/home/widgets/home_components.dart';
 import 'package:bus_ticketing/features/home/widgets/location_picker_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
