@@ -55,7 +55,7 @@ class _SearchResultScreenState extends State<SearchResultScreen> {
   }
 
   void _onScheduleTap(int index) {
-    context.go(
+    context.push(
       '/ticket-details',
       extra: {
         'schedule': mockSchedules[index],

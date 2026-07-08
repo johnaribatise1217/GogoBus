@@ -59,7 +59,7 @@ const _driverB = BusDriver(
   avatarUrl: '/assets/images/avatar-3.jpeg',
 );
 
-// -- mock crew --
+// mock crew
 const _crewA = BusCrew(
   name: 'Dicky Fernandez',
   avatarUrl: '/assets/images/avatar-2.jpeg',
@@ -70,7 +70,7 @@ const _crewB = BusCrew(
   avatarUrl: '/assets/images/avatar-3.jpeg',
 );
 
-// -- mock bus models --
+// mock bus models
 const _busModelA = BusModel(
   modelName: 'Legacy SR3 XHD Prime',
   busClass: 'Executive',

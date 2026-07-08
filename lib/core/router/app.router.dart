@@ -12,6 +12,7 @@ import 'package:bus_ticketing/features/onboarding/screens/onboarding_screen.dart
 import 'package:bus_ticketing/features/onboarding/screens/splash_screen.dart';
 import 'package:bus_ticketing/features/search/models/schedule.dart';
 import 'package:bus_ticketing/features/search/screens/search_result_screen.dart';
+import 'package:bus_ticketing/features/tickets/buy-ticket/screen/buy_ticket_screen.dart';
 import 'package:bus_ticketing/features/tickets/detail/screen/ticket_details_screen.dart';
 import 'package:bus_ticketing/main_scaffold.dart';
 import 'package:go_router/go_router.dart';
@@ -39,7 +40,7 @@ class AppRouter {
       GoRoute(
         path: '/verify-otp',
         builder: (context, state) =>
-          const VerifyScreenOtp(email: 'aribatisejohn8@gmail.com'),
+            const VerifyScreenOtp(email: 'aribatisejohn8@gmail.com'),
       ),
       GoRoute(
         path: '/complete-account',
@@ -68,7 +69,21 @@ class AppRouter {
             destination: extra['destination'] as Terminal,
             date: extra['date'] as DateTime,
           );
-        }
+        },
+      ),
+
+      GoRoute(
+        path: '/buy-ticket',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, dynamic>;
+          return BuyTicketScreen(
+            schedule: extra['schedule'] as Schedule,
+            departure: extra['departure'] as Terminal,
+            destination: extra['destination'] as Terminal,
+            date: extra['date'] as DateTime,
+            passengers: extra['passengers'] as int
+          );
+        },
       ),
 
       StatefulShellRoute.indexedStack(
@@ -78,25 +93,37 @@ class AppRouter {
         branches: [
           StatefulShellBranch(
             routes: [
-              GoRoute(path: '/home', builder: (context, state) => const HomeScreen()),
+              GoRoute(
+                path: '/home',
+                builder: (context, state) => const HomeScreen(),
+              ),
             ],
           ),
           StatefulShellBranch(
             routes: [
-              GoRoute(path: '/activity', builder: (context, state) => const ActivityScreen()),
+              GoRoute(
+                path: '/activity',
+                builder: (context, state) => const ActivityScreen(),
+              ),
             ],
           ),
           StatefulShellBranch(
             routes: [
-              GoRoute(path: '/notifications', builder: (context, state) => const NotificationScreen()),
+              GoRoute(
+                path: '/notifications',
+                builder: (context, state) => const NotificationScreen(),
+              ),
             ],
           ),
           StatefulShellBranch(
             routes: [
-              GoRoute(path: '/profile', builder: (context, state) => const ProfileScreen()),
+              GoRoute(
+                path: '/profile',
+                builder: (context, state) => const ProfileScreen(),
+              ),
             ],
           ),
-        ]
+        ],
       ),
     ],
   );
