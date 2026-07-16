@@ -180,7 +180,7 @@ class _BuyTicketScreenState extends State<BuyTicketScreen> {
                             _labelValue(
                               label: 'Number of Passengers',
                               value: '${widget.passengers} person',
-                              alignRight: true,
+                              alignRight: false,
                             ),
                           ],
                         ),

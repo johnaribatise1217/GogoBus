@@ -22,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     controller = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 1200)
+      vsync: this,
+      duration: const Duration(milliseconds: 1200)
     );
 
     fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
-        CurvedAnimation(parent: controller, curve: Curves.easeOut)
+      CurvedAnimation(parent: controller, curve: Curves.easeOut)
     );
 
     controller.forward(); //start animation

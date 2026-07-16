@@ -3,7 +3,6 @@ import 'package:bus_ticketing/features/onboarding/models/onboarding_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class OnboardingSlide extends StatelessWidget{
   final OnboardingData data;
   const OnboardingSlide({super.key, required this.data});
@@ -22,10 +21,10 @@ class OnboardingSlide extends StatelessWidget{
                data.title,
                textAlign: TextAlign.center,
                style: GoogleFonts.poppins(
-                   fontSize: 25,
-                   fontWeight: FontWeight.w700,
-                   color: AppColors.white,
-                   height: 1.4 // line height
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.white,
+                  height: 1.4 // line height
                ),
              ),
              const SizedBox(height: 12),
@@ -33,18 +32,18 @@ class OnboardingSlide extends StatelessWidget{
                data.subtitle,
                textAlign: TextAlign.center,
                style: GoogleFonts.poppins(
-                   fontSize: 14,
-                   fontWeight: FontWeight.w400,
-                   color: AppColors.whiteMuted,
-                   height: 1.4 // line height
+                  fontSize: 13,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.whiteMuted,
+                  height: 1.4 // line height
                ),
              )
            ],
          ),
        ),
-       const SizedBox(height: 32),
+       const SizedBox(height: 25),
        SizedBox(
-         height: screenHeight * 0.45,
+         height: screenHeight * 0.4,
          width: double.infinity,
          child: Padding(
            padding: const EdgeInsets.symmetric(horizontal: 32),
