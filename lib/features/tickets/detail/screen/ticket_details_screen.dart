@@ -1,3 +1,4 @@
+// features/tickets/detail/screen/ticket_details_screen.dart
 import 'package:bus_ticketing/core/theme/app_colors.dart';
 import 'package:bus_ticketing/core/utils/formatters.dart';
 import 'package:bus_ticketing/features/home/models/terminal_data.dart';
@@ -41,11 +42,14 @@ class TicketDetailsScreen extends StatelessWidget {
               child: Row(
                 children: [
                   GestureDetector(
-                    onTap: () => context.go('/search-results', extra: {
-                      'departure': departure,
-                      'destination': destination,
-                      'date': date,
-                    }),
+                    onTap: () => context.go(
+                      '/search-results',
+                      extra: {
+                        'departure': departure,
+                        'destination': destination,
+                        'date': date,
+                      },
+                    ),
                     child: Container(
                       width: 40,
                       height: 40,
@@ -67,7 +71,7 @@ class TicketDetailsScreen extends StatelessWidget {
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
                       color: AppColors.textDark,
-                    )
+                    ),
                   ),
                   const Spacer(),
                   Container(
@@ -84,18 +88,21 @@ class TicketDetailsScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
             ),
 
             Expanded(
-              child : SingleChildScrollView(
+              child: SingleChildScrollView(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 15,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: BorderRadius.circular(20),
@@ -105,7 +112,10 @@ class TicketDetailsScreen extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 6,
+                                ),
                                 decoration: BoxDecoration(
                                   color: AppColors.surface,
                                   borderRadius: BorderRadius.circular(13),
@@ -113,8 +123,11 @@ class TicketDetailsScreen extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.calendar_today_outlined,
-                                      size: 14, color: AppColors.primary),
+                                    const Icon(
+                                      Icons.calendar_today_outlined,
+                                      size: 14,
+                                      color: AppColors.primary,
+                                    ),
                                     const SizedBox(width: 10),
                                     Text(
                                       formatDate(date),
@@ -125,11 +138,14 @@ class TicketDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                               ),
                               const Spacer(),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 6,
+                                ),
                                 decoration: BoxDecoration(
                                   color: AppColors.surface,
                                   borderRadius: BorderRadius.circular(13),
@@ -137,8 +153,11 @@ class TicketDetailsScreen extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.bolt_rounded,
-                                      size: 17, color: AppColors.textSecondary),
+                                    const Icon(
+                                      Icons.bolt_rounded,
+                                      size: 17,
+                                      color: AppColors.textSecondary,
+                                    ),
                                     const SizedBox(width: 4),
                                     Text(
                                       schedule.routeType,
@@ -149,7 +168,7 @@ class TicketDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ],
-                                )
+                                ),
                               ),
                             ],
                           ),
@@ -255,7 +274,9 @@ class TicketDetailsScreen extends StatelessWidget {
                                         ),
                                         decoration: BoxDecoration(
                                           color: AppColors.background,
-                                          borderRadius: BorderRadius.circular(100),
+                                          borderRadius: BorderRadius.circular(
+                                            100,
+                                          ),
                                         ),
                                         child: Text(
                                           schedule.duration,
@@ -308,8 +329,11 @@ class TicketDetailsScreen extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                const Icon(Icons.info_outline_rounded,
-                                    size: 16, color: AppColors.warning),
+                                const Icon(
+                                  Icons.info_outline_rounded,
+                                  size: 16,
+                                  color: AppColors.warning,
+                                ),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
@@ -351,7 +375,10 @@ class TicketDetailsScreen extends StatelessWidget {
                     //starting point , next container
                     Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 15,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.surface,
                         borderRadius: BorderRadius.circular(20),
@@ -371,7 +398,10 @@ class TicketDetailsScreen extends StatelessWidget {
                               ),
                               const Spacer(),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 6,
+                                ),
                                 decoration: BoxDecoration(
                                   color: AppColors.surface,
                                   borderRadius: BorderRadius.circular(14),
@@ -390,12 +420,12 @@ class TicketDetailsScreen extends StatelessWidget {
                                       style: GoogleFonts.manrope(
                                         color: AppColors.textDark,
                                         fontSize: 17,
-                                        fontWeight: FontWeight.w700
-                                      )
-                                    )
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                           const SizedBox(height: 14),
@@ -404,22 +434,22 @@ class TicketDetailsScreen extends StatelessWidget {
                           _crewTile(
                             label: 'Driver',
                             name: schedule.driver.name,
-                            url: schedule.driver.avatarUrl
+                            url: schedule.driver.avatarUrl,
                           ),
                           const SizedBox(height: 12),
                           _crewTile(
                             label: 'Crew',
                             name: schedule.crew.name,
-                            url: schedule.driver.avatarUrl
+                            url: schedule.driver.avatarUrl,
                           ),
                         ],
                       ),
-                    )
-                  ]
-                )
-              )
+                    ),
+                  ],
+                ),
+              ),
             ),
-            
+
             const SizedBox(height: 20),
 
             Container(
@@ -471,8 +501,12 @@ class TicketDetailsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Icon(Icons.confirmation_number_outlined,
-                          size: 20, color: AppColors.white, fontWeight: FontWeight.w700,),
+                        const Icon(
+                          Icons.confirmation_number_outlined,
+                          size: 20,
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
                         const SizedBox(width: 8),
                         const Text('Buy Ticket'),
                       ],
@@ -480,7 +514,7 @@ class TicketDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
 
             // SizedBox(
             //   height: MediaQuery.of(context).padding.bottom + 16),
@@ -523,8 +557,11 @@ class TicketDetailsScreen extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Icon(Icons.event_seat_outlined,
-              size: 18, color: AppColors.textSecondary),
+            const Icon(
+              Icons.event_seat_outlined,
+              size: 18,
+              color: AppColors.textSecondary,
+            ),
             const SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -548,7 +585,7 @@ class TicketDetailsScreen extends StatelessWidget {
             ),
           ],
         ),
-        if (trailing != null) trailing,
+        ?trailing,
       ],
     );
   }
@@ -602,12 +639,11 @@ class _PassengerStepper extends StatefulWidget {
   State<_PassengerStepper> createState() => _PassengerStepperState();
 }
 
-class _PassengerStepperState extends State<_PassengerStepper>{
+class _PassengerStepperState extends State<_PassengerStepper> {
   int _count = 1;
 
   @override
   Widget build(BuildContext context) {
-
     return Row(
       children: [
         _stepButton(
@@ -625,10 +661,7 @@ class _PassengerStepperState extends State<_PassengerStepper>{
             ),
           ),
         ),
-        _stepButton(
-          icon: Icons.add,
-          onTap: () => setState(() => _count++),
-        ),
+        _stepButton(icon: Icons.add, onTap: () => setState(() => _count++)),
       ],
     );
   }
@@ -642,8 +675,8 @@ class _PassengerStepperState extends State<_PassengerStepper>{
         height: 32,
         decoration: BoxDecoration(
           color: isDisabled
-            ? AppColors.divider
-            : AppColors.primary.withValues(alpha: 0.1),
+              ? AppColors.divider
+              : AppColors.primary.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Icon(
@@ -654,5 +687,4 @@ class _PassengerStepperState extends State<_PassengerStepper>{
       ),
     );
   }
-  
 }

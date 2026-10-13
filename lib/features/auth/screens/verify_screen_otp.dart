@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+// features/auth/screens/verify_screen_otp.dart
 import 'package:bus_ticketing/core/theme/app_colors.dart';
 import 'package:bus_ticketing/features/auth/screens/sms_retrieval_implementation.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +10,7 @@ import 'package:smart_auth/smart_auth.dart';
 class VerifyScreenOtp extends StatefulWidget {
   final String email;
 
-  const VerifyScreenOtp({
-    super.key,
-    required this.email,
-  });
+  const VerifyScreenOtp({super.key, required this.email});
 
   @override
   State<VerifyScreenOtp> createState() => _VerifyScreenOtpState();
@@ -29,9 +25,7 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
   @override
   void initState() {
     super.initState();
-    _smsRetriever = SmsRetrieverImpl(
-      SmartAuth.instance,
-    );
+    _smsRetriever = SmsRetrieverImpl(SmartAuth.instance);
   }
 
   @override
@@ -49,8 +43,8 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
     final name = parts.first;
 
     final masked = name.length <= 2
-      ? name
-      : '${name[0]}${'*' * (name.length - 2)}${name[name.length - 1]}';
+        ? name
+        : '${name[0]}${'*' * (name.length - 2)}${name[name.length - 1]}';
 
     return '$masked@${parts.last}';
   }
@@ -58,9 +52,7 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
   Future<void> _handleVerify() async {
     if (_otpController.text.length != 6) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Please enter the 6-digit code"),
-        ),
+        const SnackBar(content: Text("Please enter the 6-digit code")),
       );
       return;
     }
@@ -79,11 +71,9 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
   void _handleResend() {
     _otpController.clear();
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("OTP sent successfully"),
-      ),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("OTP sent successfully")));
   }
 
   @override
@@ -97,12 +87,9 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
         child: AnimatedPadding(
           duration: const Duration(milliseconds: 250),
           curve: Curves.easeOut,
-          padding: EdgeInsets.only(
-            bottom: media.viewInsets.bottom,
-          ),
+          padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
           child: SingleChildScrollView(
-            keyboardDismissBehavior:
-                ScrollViewKeyboardDismissBehavior.onDrag,
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight:
@@ -174,9 +161,7 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
                             fontWeight: FontWeight.bold,
                           ),
                           decoration: BoxDecoration(
-                            border: Border.all(
-                              color: AppColors.divider,
-                            ),
+                            border: Border.all(color: AppColors.divider),
                             borderRadius: BorderRadius.circular(14),
                           ),
                         ),
@@ -209,19 +194,17 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
                       ),
                     ),
 
-                    SizedBox(height: media.size.height * .18),
+                    SizedBox(height: media.size.height * .30),
 
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed:
-                            _isVerifying ? null : _handleVerify,
+                        onPressed: _isVerifying ? null : _handleVerify,
                         child: _isVerifying
                             ? const SizedBox(
                                 height: 22,
                                 width: 22,
-                                child:
-                                    CircularProgressIndicator(
+                                child: CircularProgressIndicator(
                                   strokeWidth: 2,
                                 ),
                               )
@@ -249,22 +232,16 @@ class _VerifyScreenOtpState extends State<VerifyScreenOtp> {
                             fontSize: 14,
                           ),
                           children: [
-                            const TextSpan(
-                              text: "Is the email correct? ",
-                            ),
+                            const TextSpan(text: "Is the email correct? "),
                             WidgetSpan(
-                              alignment:
-                                  PlaceholderAlignment.middle,
+                              alignment: PlaceholderAlignment.middle,
                               child: GestureDetector(
                                 onTap: () => context.pop(),
                                 child: Text(
                                   "Change email",
-                                  style:
-                                      GoogleFonts.manrope(
-                                    color:
-                                        AppColors.accent,
-                                    fontWeight:
-                                        FontWeight.bold,
+                                  style: GoogleFonts.manrope(
+                                    color: AppColors.accent,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),

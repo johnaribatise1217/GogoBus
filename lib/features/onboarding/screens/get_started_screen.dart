@@ -1,3 +1,4 @@
+// features/onboarding/screens/get_started_screen.dart
 import 'package:bus_ticketing/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -76,7 +77,9 @@ class GetStartedScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Divider(
-                              color: AppColors.whiteMuted.withOpacity(0.3),
+                              color: AppColors.whiteMuted.withValues(
+                                alpha: 0.3,
+                              ),
                             ),
                           ),
                           Padding(
@@ -91,7 +94,9 @@ class GetStartedScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Divider(
-                              color: AppColors.whiteMuted.withOpacity(0.3),
+                              color: AppColors.whiteMuted.withValues(
+                                alpha: 0.3,
+                              ),
                             ),
                           ),
                         ],
@@ -115,15 +120,11 @@ class GetStartedScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: _socialButton(
-                              'assets/icons/apple_logo.png',
-                            ),
+                            child: _socialButton('assets/icons/apple_logo.png'),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: _socialButton(
-                              'assets/icons/phone_logo.png',
-                            ),
+                            child: _socialButton('assets/icons/phone_logo.png'),
                           ),
                         ],
                       ),

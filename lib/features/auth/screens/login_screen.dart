@@ -1,3 +1,4 @@
+// features/auth/screens/login_screen.dart
 // ignore_for_file: unused_local_variable
 
 import 'package:bus_ticketing/core/theme/app_colors.dart';
@@ -5,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginScreen extends StatefulWidget{
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen>{
+class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -42,11 +43,7 @@ class _LoginScreenState extends State<LoginScreen>{
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const SizedBox(height: 60),
-                Image.asset(
-                  "assets/icons/logo-bus.png",
-                  height: 50,
-                  width: 50,
-                ),
+                Image.asset("assets/icons/logo-bus.png", height: 50, width: 50),
                 const SizedBox(height: 15),
                 Text(
                   "Log In",
@@ -109,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen>{
                         color: AppColors.textHint,
                         size: 20,
                       ),
-                    )
+                    ),
                   ),
                   validator: (value) {
                     if (value == null ||
@@ -195,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     ),
                     Expanded(
                       child: Divider(
-                        color: AppColors.whiteMuted.withOpacity(0.3),
+                        color: AppColors.whiteMuted.withValues(alpha: 0.3),
                         thickness: 1,
                       ),
                     ),
@@ -214,7 +211,7 @@ class _LoginScreenState extends State<LoginScreen>{
                     _socialButton('assets/icons/phone_logo.png'),
                   ],
                 ),
-                const SizedBox(height:20),
+                const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -248,23 +245,15 @@ class _LoginScreenState extends State<LoginScreen>{
     );
   }
 
-
   Widget _socialButton(String svgPath) {
     return Container(
-      width: 83,
-      height: 58,
+      width: 75,
+      height: 50,
       decoration: BoxDecoration(
         color: AppColors.white,
         borderRadius: BorderRadius.circular(14),
       ),
-      child: Center(
-        child: Image.asset(
-          svgPath,
-          width: 30,
-          height: 30,
-        ),
-      ),
+      child: Center(child: Image.asset(svgPath, width: 30, height: 30)),
     );
   }
-
 }

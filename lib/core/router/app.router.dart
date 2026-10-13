@@ -1,3 +1,4 @@
+// core/router/app.router.dart
 import 'package:bus_ticketing/features/auth/screens/complete_account_screen.dart';
 import 'package:bus_ticketing/features/auth/screens/login_screen.dart';
 import 'package:bus_ticketing/features/auth/screens/signup_screen.dart';
@@ -40,7 +41,7 @@ class AppRouter {
       GoRoute(
         path: '/verify-otp',
         builder: (context, state) =>
-            const VerifyScreenOtp(email: 'aribatisejohn8@gmail.com'),
+          const VerifyScreenOtp(email: 'aribatisejohn8@gmail.com'),
       ),
       GoRoute(
         path: '/complete-account',
